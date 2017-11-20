@@ -11,21 +11,23 @@
     <!-- endbuild -->
   </head>
   <body>
-    <h1>fazlamesai.net'e gönder</h1>
-
-    <form accept-charset="UTF-8" method="post" id="link_form">
+    <form accept-charset="UTF-8" method="post" id="options_form">
       <div class="form-group">
-        <label class="control-label" for="link_title">Başlık <abbr title="gerekli">*</abbr></label>
-        <input class="form-control" maxlength="140" size="140" type="text" name="link[title]" id="link_title">
+        <label class="control-label" for="base_url">API url
+          <abbr title="gerekli">*</abbr>
+        </label>
+        <input class="form-control" type="text" id="base_url" value="http://localhost:3000">
       </div>
 
       <div class="form-group">
-        <label class="control-label" for="link_url">Adres <abbr title="gerekli">*</abbr></label>
-        <input class="form-control" type="text" name="link[url]" id="link_url">
+        <label class="control-label" for="auth_token">Anahtar
+          <abbr title="gerekli">*</abbr>
+        </label>
+        <input class="form-control" type="text" id="auth_token">
       </div>
 
       <div class="form-group">
-        <input type="submit" value="Gönder">
+        <input type="submit" value="Kaydet">
         <span id="status" class="pull-right"></span>
       </div>
     </form>
@@ -35,8 +37,8 @@
     <!-- endbower -->
     <!-- endbuild -->
 
-    <!-- build:js scripts/popup.js -->
-    <script src="scripts/popup.js"></script>
+    <!-- build:js scripts/options.js -->
+    <script src="scripts/options.js"></script>
     <!-- endbuild -->
   </body>
 </html>

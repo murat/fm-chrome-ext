@@ -32,6 +32,7 @@ input:not([type=hidden]):focus {
 }
 
 input[type=submit] {
+  display: inline-block;
   width: 100px;
   background: #e65003;
   border-color: #e65003;
