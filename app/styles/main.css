@@ -1,0 +1,45 @@
+body {
+  padding: 20px;
+}
+
+form {
+  display: block;
+  width: 300px;
+}
+
+.form-group {
+  padding: 5px 0;
+}
+
+label {
+  display: block;
+  padding: 0 0 8px;
+}
+
+input:not([type=hidden]) {
+  display: block;
+  max-width: calc(100% - 20px);
+  width: calc(100% - 20px);
+  border-radius: 3px;
+  outline: none;
+  padding: 5px 10px;
+  border: 1px solid #eee;
+  transition: border-color .5s;
+}
+
+input:not([type=hidden]):focus {
+  border-color: #e65003;
+}
+
+input[type=submit] {
+  width: 100px;
+  background: #e65003;
+  border-color: #e65003;
+  color: #fff;
+}
+
+input[type=submit]:hover {
+  color: #e65003;
+  background-color: #fff;
+  cursor: pointer;
+}

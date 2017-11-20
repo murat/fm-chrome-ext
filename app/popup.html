@@ -1,0 +1,41 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <!-- build:css styles/popup-vendor.css -->
+    <!-- bower:css -->
+    <!-- endbower -->
+    <!-- endbuild -->
+    <!-- build:css styles/main.css -->
+    <link href="styles/main.css" rel="stylesheet">
+    <!-- endbuild -->
+  </head>
+  <body>
+    <h1>fazlamesai.net'e gönder</h1>
+
+    <form accept-charset="UTF-8" method="post">
+      <input value="Link" type="hidden" name="link[type]" id="link_type">
+
+      <div class="form-group">
+        <label class="control-label" for="link_title">Başlık <abbr title="gerekli">*</abbr></label>
+        <input class="form-control" maxlength="140" size="140" type="text" name="link[title]" id="link_title">
+      </div>
+
+      <div class="form-group">
+        <label class="control-label" for="link_url">Adres <abbr title="gerekli">*</abbr></label>
+        <input class="form-control" type="text" name="link[url]" id="link_url">
+      </div>
+
+      <input type="submit" value="Gönder">
+    </form>
+
+    <!-- build:js scripts/popup-vendor.js -->
+    <!-- bower:js -->
+    <!-- endbower -->
+    <!-- endbuild -->
+
+    <!-- build:js scripts/popup.js -->
+    <script src="scripts/popup.js"></script>
+    <!-- endbuild -->
+  </body>
+</html>
