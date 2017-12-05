@@ -4,7 +4,7 @@
 
 ### Kurulum
 
-[Relases](https://github.com/muratbsts/fm-chrome-ext/releases) sekmesinden eklentinin son paketini indirip [Chrome Extensions](chrome://extensions/) sayfasına sürükleyerek kurabilirsiniz. Kişisel erişim anahtarı haricinde hiç bir izne ihtiyaç duymaz. Erişim anahtarını eklenti ayarlarından eklemeniz gerekmektedir. Erişim anahtarınızı [profil sayfanızdan](https://fazlamesai.net/users/USERNAME/tokens) ([fazlamesai.net/users/USERNAME/tokens](https://fazlamesai.net/users/USERNAME/tokens)) alabilirsiniz.
+[Relases](https://github.com/muratbsts/fm-chrome-ext/releases) sekmesinden eklentinin son paketini indirip [Chrome Extensions](chrome://extensions/) sayfasına sürükleyerek kurabilirsiniz. Kişisel erişim anahtarı haricinde hiç bir izne ihtiyaç duymaz. Erişim anahtarını eklenti ayarlarından eklemeniz gerekmektedir. Erişim anahtarınızı profil sayfanızdan (fazlamesai.net/users/KULLANICI ADINIZ/tokens) alabilirsiniz.
 
 ### Ekran görüntüleri
 
