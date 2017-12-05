@@ -14,7 +14,7 @@
 
 ### Yapılacaklar
 
-- [ ] Link paylaşma
+- [x] Link paylaşma
 - [ ] Yazı paylaşma
 - [ ] Bildirimler alma
 
