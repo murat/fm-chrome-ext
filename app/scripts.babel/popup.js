@@ -59,7 +59,10 @@ if (document.getElementById('link_form')) {
       if (this.readyState === 4 && this.status === 200) {
           document.getElementById('status').innerHTML = 'Link paylaşıldı. Yayınlamayı/değerlendirmeye göndermeyi unutmayın!!!';
           document.getElementById('link_form').reset();
-          chrome.tabs.create({ url: JSON.parse(this.responseText).url });
+          var url = JSON.parse(this.responseText).url;
+          setTimeout(function() {
+            chrome.tabs.create({ url: url });
+          }, 2000);
       } else {
         document.getElementById('status').innerHTML = 'Oturum açma başarısız!';
       }
