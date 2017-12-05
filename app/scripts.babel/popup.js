@@ -5,7 +5,7 @@ var new_link_url = '', auth_token = '';
 var getOptions = new Promise(function (resolve, reject) {
   chrome.storage.sync.get({
     auth_token: null,
-    base_url: 'http://localhost:3000'
+    base_url: 'https://fazlamesai.net'
   }, function (items) {
     auth_token = items.auth_token;
     new_link_url = items.base_url + '/api/v1/links';
@@ -16,7 +16,7 @@ var getOptions = new Promise(function (resolve, reject) {
       resolve('Stuff worked!');
     } else {
       if (document.getElementById('link_form')) {
-        document.getElementById('link_form').innerHTML = 'Please provide an auth token from <a style="color:red;" id="options_toggle">options</a> menu before.';
+        document.getElementById('link_form').innerHTML = 'Lütfen önce <a style="color:red;" id="options_toggle">eklenti ayarlarından</a> kişisel erişim anahtarınızı ekleyin.';
       }
 
       if (document.getElementById('options_toggle')) {
@@ -57,10 +57,11 @@ if (document.getElementById('link_form')) {
 
     xhr.addEventListener('readystatechange', function () {
       if (this.readyState === 4 && this.status === 200) {
-          document.getElementById('status').innerHTML = 'Success. <br/>URL: ' + JSON.parse(this.responseText).url;
+          document.getElementById('status').innerHTML = 'Link paylaşıldı. Yayınlamayı/değerlendirmeye göndermeyi unutmayın!!!';
           document.getElementById('link_form').reset();
+          chrome.tabs.create({ url: JSON.parse(this.responseText).url });
       } else {
-        document.getElementById('status').innerHTML = 'Authentication error!';
+        document.getElementById('status').innerHTML = 'Oturum açma başarısız!';
       }
     });
 
@@ -68,7 +69,7 @@ if (document.getElementById('link_form')) {
     xhr.setRequestHeader('authorization', 'Bearer ' + auth_token);
     xhr.setRequestHeader('cache-control', 'no-cache');
     xhr.onerror = function () {
-      document.getElementById('status').innerHTML = 'Failed.';
+      document.getElementById('status').innerHTML = 'Başarısız.';
     };
     xhr.send(data);
   });
