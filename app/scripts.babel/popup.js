@@ -16,7 +16,7 @@ var getOptions = new Promise(function (resolve, reject) {
       resolve('Stuff worked!');
     } else {
       if (document.getElementById('link_form')) {
-        document.getElementById('link_form').innerHTML = 'Lütfen önce <a style="color:red;" id="options_toggle">eklenti ayarlarından</a> kişisel erişim anahtarınızı ekleyin.';
+        document.getElementById('link_form').innerHTML = 'Lütfen önce <a style="color:red; cursor:pointer;" id="options_toggle">eklenti ayarlarından</a> kişisel erişim anahtarınızı ekleyin.';
       }
 
       if (document.getElementById('options_toggle')) {
@@ -47,8 +47,13 @@ if (document.getElementById('link_form')) {
     event.preventDefault();
 
     var data = new FormData();
+    var tags = document.getElementById('link_tags').value;
+    if (tags.length && tags.search()) {
+      tags = tags.split(/[\s,]+/)
+    }
     data.append('link[title]', document.getElementById('link_title').value);
     data.append('link[url]', document.getElementById('link_url').value);
+    data.append('link[tag_list][]', tags);
 
     var xhr = new XMLHttpRequest()
     if (xhr.withCredentials === undefined) {
@@ -57,14 +62,17 @@ if (document.getElementById('link_form')) {
 
     xhr.addEventListener('readystatechange', function () {
       if (this.readyState === 4 && this.status === 200) {
-          document.getElementById('status').innerHTML = 'Link paylaşıldı. Yayınlamayı/değerlendirmeye göndermeyi unutmayın!!!';
-          document.getElementById('link_form').reset();
-          var url = JSON.parse(this.responseText).url;
-          setTimeout(function() {
-            chrome.tabs.create({ url: url });
-          }, 2000);
-      } else {
+        var resp = JSON.parse(this.responseText),
+            url = resp.url;
+        document.getElementById('status').innerHTML = resp.message;
+        document.getElementById('link_form').reset();
+        setTimeout(function() {
+          chrome.tabs.create({ url: url });
+        }, 2000);
+      } else if (this.status === 401) {
         document.getElementById('status').innerHTML = 'Oturum açma başarısız!';
+      } else {
+        document.getElementById('status').innerHTML = 'Bir sorun oluştu.';
       }
     });
 
@@ -72,7 +80,7 @@ if (document.getElementById('link_form')) {
     xhr.setRequestHeader('authorization', 'Bearer ' + auth_token);
     xhr.setRequestHeader('cache-control', 'no-cache');
     xhr.onerror = function () {
-      document.getElementById('status').innerHTML = 'Başarısız.';
+      document.getElementById('status').innerHTML = 'Bir sorun oluştu.';
     };
     xhr.send(data);
   });
