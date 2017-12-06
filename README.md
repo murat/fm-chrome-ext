@@ -15,6 +15,7 @@
 ### Yapılacaklar
 
 - [x] Link paylaşma
+- [x] Etiketleme
 - [ ] Yazı paylaşma
 - [ ] Bildirimler alma
 
