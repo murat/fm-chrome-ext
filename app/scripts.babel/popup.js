@@ -6,6 +6,7 @@ var getOptions = new Promise(function (resolve, reject) {
   chrome.storage.sync.get({
     auth_token: null,
     base_url: 'https://fazlamesai.net'
+    // base_url: 'http://localhost:3000' for development
   }, function (items) {
     auth_token = items.auth_token;
     new_link_url = items.base_url + '/api/v1/links';
@@ -61,18 +62,22 @@ if (document.getElementById('link_form')) {
     }
 
     xhr.addEventListener('readystatechange', function () {
-      if (this.readyState === 4 && this.status === 200) {
-        var resp = JSON.parse(this.responseText),
-            url = resp.url;
-        document.getElementById('status').innerHTML = resp.message;
-        document.getElementById('link_form').reset();
-        setTimeout(function() {
-          chrome.tabs.create({ url: url });
-        }, 2000);
-      } else if (this.status === 401) {
-        document.getElementById('status').innerHTML = 'Oturum açma başarısız!';
+      if (this.readyState === 4) {
+        if (this.status === 200) {
+          var resp = JSON.parse(this.responseText),
+              url = resp.url;
+          document.getElementById('status').innerHTML = resp.message;
+          document.getElementById('link_form').reset();
+          setTimeout(function() {
+            chrome.tabs.create({ url: url });
+          }, 2000);
+        } else if (this.status === 401) {
+          document.getElementById('status').innerHTML = 'Oturum açma başarısız!';
+        } else {
+          document.getElementById('status').innerHTML = 'Bir sorun oluştu.';
+        }
       } else {
-        document.getElementById('status').innerHTML = 'Bir sorun oluştu.';
+        document.getElementById('status').innerHTML = '...';
       }
     });
 
