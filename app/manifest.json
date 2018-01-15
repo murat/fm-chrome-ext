@@ -1,6 +1,6 @@
 {
   "name": "__MSG_appName__",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "manifest_version": 2,
   "description": "__MSG_appDescription__",
   "icons": {
@@ -8,6 +8,11 @@
     "128": "images/icon-128.png"
   },
   "default_locale": "en",
+  "applications": {
+    "gecko": {
+      "id": "fm@fazlamesai.org"
+    }
+  },
   "background": {
     "scripts": [
       "scripts/chromereload.js",

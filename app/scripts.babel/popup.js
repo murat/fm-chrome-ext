@@ -6,7 +6,6 @@ var getOptions = new Promise(function (resolve, reject) {
   chrome.storage.sync.get({
     auth_token: null,
     base_url: 'https://fazlamesai.net'
-    // base_url: 'http://localhost:3000' for development
   }, function (items) {
     auth_token = items.auth_token;
     new_link_url = items.base_url + '/api/v1/links';
