@@ -6,7 +6,7 @@ var getOptions = new Promise(function (resolve, reject) {
   chrome.storage.sync.get({
     auth_token: null,
     base_url: 'https://fazlamesai.net'
-    // base_url: 'http://localhost:3000' for development
+    // base_url: 'http://localhost:3000' // for development
   }, function (items) {
     auth_token = items.auth_token;
     new_link_url = items.base_url + '/api/v1/links';
@@ -63,18 +63,21 @@ if (document.getElementById('link_form')) {
 
     xhr.addEventListener('readystatechange', function () {
       if (this.readyState === 4) {
-        if (this.status === 200) {
-          var resp = JSON.parse(this.responseText),
-              url = resp.url;
-          document.getElementById('status').innerHTML = resp.message;
-          document.getElementById('link_form').reset();
-          setTimeout(function() {
-            chrome.tabs.create({ url: url });
-          }, 2000);
-        } else if (this.status === 401) {
-          document.getElementById('status').innerHTML = 'Oturum açma başarısız!';
-        } else {
-          document.getElementById('status').innerHTML = 'Bir sorun oluştu.';
+        var resp = JSON.parse(this.responseText);
+
+        switch (this.status) {
+          case 401:
+            document.getElementById('status').innerHTML = 'Oturum açma başarısız!';
+            break;
+
+          default:
+            var url = resp.url;
+            document.getElementById('status').innerHTML = resp.message;
+            document.getElementById('link_form').reset();
+            setTimeout(function () {
+              chrome.tabs.create({ url: url });
+            }, 3000);
+            break;
         }
       } else {
         document.getElementById('status').innerHTML = '...';
@@ -85,7 +88,7 @@ if (document.getElementById('link_form')) {
     xhr.setRequestHeader('authorization', 'Bearer ' + auth_token);
     xhr.setRequestHeader('cache-control', 'no-cache');
     xhr.onerror = function () {
-      document.getElementById('status').innerHTML = 'Bir sorun oluştu.';
+      document.getElementById('status').innerHTML = 'İstek gönderirken bir sorun oluştu!';
     };
     xhr.send(data);
   });
